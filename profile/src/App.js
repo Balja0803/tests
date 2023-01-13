@@ -3,6 +3,7 @@ import WelcomePage from "./components/WelcomePage";
 import "./App.css";
 import { useState } from "react";
 import data from "../src/components/util/data.js";
+import Header from "./components/Header";
 function App() {
   console.log(data);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -26,11 +27,17 @@ function App() {
   return (
     <div className="App">
       <div>
-        {isLoggedIn ? (
-          <Profile setLogout={getMeOuttaHere} />
-        ) : (
-          <WelcomePage setLogin={loginHandler} />
-        )}
+        <Header />
+        <Routes>
+          <Route exact path="/" element={<Home />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/about" element={<About />} />
+          {isLoggedIn ? (
+            <Profile setLogout={getMeOuttaHere} />
+          ) : (
+            <WelcomePage setLogin={loginHandler} />
+          )}
+        </Routes>
       </div>
     </div>
   );
